@@ -42,13 +42,6 @@ Open: Settings → Community plugins → AI Writer (gear icon)
 
 Common error: `Unexpected token '<' ... is not valid JSON` usually means your `API Base` returned HTML (wrong URL or missing `/v1`).
 
-## Development
-
-- Local dev + install: `docs/DEVELOPMENT.md`
-- Packaging: `scripts/package.ps1`
-- Releases (GitHub Actions): `.github/workflows/release.yml`
-- Contributing: `docs/CONTRIBUTING.md`
-- Changelog: `docs/CHANGELOG.md`
 
 ## License
 
