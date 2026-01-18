@@ -1,0 +1,11 @@
+node_modules/
+main.js
+main.js.map
+dist/
+release/
+*.tsbuildinfo
+.DS_Store
+.idea/
+.vscode/
+data.json
+mvp.defaults.json

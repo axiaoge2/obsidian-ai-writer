@@ -1,0 +1,47 @@
+name: Release (Obsidian Plugin)
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Prepare assets
+        run: |
+          PLUGIN_ID=$(node --input-type=module -e "import {readFileSync} from 'node:fs'; console.log(JSON.parse(readFileSync('manifest.json','utf8')).id)")
+          mkdir -p release
+          cp manifest.json release/manifest.json
+          cp main.js release/main.js
+          if [ -f styles.css ]; then cp styles.css release/styles.css; fi
+          if [ -f versions.json ]; then cp versions.json release/versions.json; fi
+          (cd release && zip -r ../${PLUGIN_ID}.zip .)
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/manifest.json
+            release/main.js
+            release/styles.css
+            release/versions.json
+            *.zip

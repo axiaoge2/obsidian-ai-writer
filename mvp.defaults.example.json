@@ -1,0 +1,6 @@
+{
+  "providerId": "aiwriter",
+  "apiBase": "https://your-openai-compatible-endpoint/v1",
+  "apiKey": "",
+  "model": "your-model-name"
+}
