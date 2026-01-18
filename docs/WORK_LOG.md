@@ -8,12 +8,23 @@
 
 - 仓库已推送到 GitHub：`https://github.com/axiaoge2/obsidian-ai-writer`
 - 默认分支：`main`
-- 已打 tag 并推送：`v0.1.0`（会触发 GitHub Actions 自动发布 Release）
+- 已打 tag 并推送：`v0.1.0`、`v0.1.1`（会触发 GitHub Actions 自动发布 Release）
 - 插件关键信息：
   - `manifest.json#id`：`ai-writer-kit`
   - `manifest.json#author`：`AxiaoGe2`
 - 文档已精简为技术向：`docs/` 仅保留开发/发版/贡献/更新/工作日志；已移除营销/规划类文档
 - 打包脚本强化：`scripts/package.ps1` 默认不包含 `mvp.defaults.json`；如 `-IncludeMvpDefaults` 且检测到非空 `apiKey` 会拒绝打包
+- 新增可公开默认配置：`mvp.defaults.public.json`（会在 Release 时复制为 `mvp.defaults.json` 打进 zip；强制 `apiKey` 为空）
+- 已将公开默认网关写入 `mvp.defaults.public.json`（不含 key）：
+  - `apiBase`: `https://54185418.xyz/v1`
+  - `model`: `claude-sonnet-4-5-20250929`
+  - 注意：若网关要求 token，会出现 401（“未提供令牌”）
+
+### 当前结论（关于默认可用与密钥）
+
+- 公开仓库/Release 不应包含真实 `apiKey`（会被自动抓取滥用）。
+- 如果你希望用户“免配置可用”，网关需要支持**无 token 访问**（由网关服务端持有上游 key，并做限流/风控）。
+- 如果只给你自己用：可以在你本地 Vault 的插件目录放 `mvp.defaults.json`（含 key），但不要提交/发布。
 
 ### 下一步（你确认即可）
 
