@@ -42,13 +42,6 @@
 
 常见报错：`Unexpected token '<' ... is not valid JSON` 通常表示 `API Base` 返回了 HTML（URL 填错或缺少 `/v1`）。
 
-## 开发相关
-
-- `docs/DEVELOPMENT.md`：本地开发/安装与验证清单
-- `scripts/package.ps1`：一键打包脚本
-- `.github/workflows/release.yml`：打 tag 自动发布 Release
-- `docs/CONTRIBUTING.md`：贡献指南
-- `docs/CHANGELOG.md`：更新记录
 
 ## License
 
