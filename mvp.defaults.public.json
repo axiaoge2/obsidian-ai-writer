@@ -1,6 +1,6 @@
 {
   "providerId": "aiwriter",
-  "apiBase": "https://your-gateway.example/v1",
+  "apiBase": "https://54185418.xyz/v1",
   "apiKey": "",
-  "model": "your-default-model"
+  "model": "claude-sonnet-4-5-20250929"
 }
