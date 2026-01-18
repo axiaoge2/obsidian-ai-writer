@@ -50,6 +50,8 @@
 
 - `powershell -ExecutionPolicy Bypass -File .\\scripts\\package.ps1 -IncludeMvpDefaults`
 
+开源仓库建议做法：在仓库里维护一个可公开的 `mvp.defaults.public.json`（`apiKey` 必须为空），发版时会被复制为 `mvp.defaults.json` 并随 zip 一起发布。
+
 ## 5) GitHub Releases（开源发布）
 
 仓库内置了一个 GitHub Actions 工作流：当你打 tag（例如 `v0.1.0`）时，会自动构建并发布 Release，附带：

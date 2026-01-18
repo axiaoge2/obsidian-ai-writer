@@ -34,6 +34,10 @@ jobs:
           cp main.js release/main.js
           if [ -f styles.css ]; then cp styles.css release/styles.css; fi
           if [ -f versions.json ]; then cp versions.json release/versions.json; fi
+          if [ -f mvp.defaults.public.json ]; then
+            node --input-type=module -e "import {readFileSync} from 'node:fs'; const j=JSON.parse(readFileSync('mvp.defaults.public.json','utf8')); const k=String(j.apiKey||'').trim(); if(k) { console.error('mvp.defaults.public.json apiKey must be empty'); process.exit(1); }"
+            cp mvp.defaults.public.json release/mvp.defaults.json
+          fi
           (cd release && zip -r ../${PLUGIN_ID}.zip .)
 
       - name: Publish GitHub Release

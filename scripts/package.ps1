@@ -30,20 +30,25 @@ $files = @("manifest.json", "main.js", "styles.css", "versions.json")
 $optionalFiles = @()
 
 if ($IncludeMvpDefaults) {
-  if (!(Test-Path "mvp.defaults.json")) {
-    throw "IncludeMvpDefaults was set but mvp.defaults.json was not found."
+  $defaultsSource = $null
+  if (Test-Path "mvp.defaults.public.json") {
+    $defaultsSource = "mvp.defaults.public.json"
+  } elseif (Test-Path "mvp.defaults.json") {
+    $defaultsSource = "mvp.defaults.json"
+  } else {
+    throw "IncludeMvpDefaults was set but neither mvp.defaults.public.json nor mvp.defaults.json was found."
   }
   try {
-    $defaults = Get-Content "mvp.defaults.json" -Raw -Encoding utf8 | ConvertFrom-Json
+    $defaults = Get-Content $defaultsSource -Raw -Encoding utf8 | ConvertFrom-Json
     $apiKey = [string]$defaults.apiKey
     if (-not [string]::IsNullOrWhiteSpace($apiKey)) {
-      throw "mvp.defaults.json contains a non-empty apiKey. Refusing to package secrets. Remove apiKey (leave blank) and retry."
+      throw "$defaultsSource contains a non-empty apiKey. Refusing to package secrets. Remove apiKey (leave blank) and retry."
     }
   } catch {
     throw "Failed to validate mvp.defaults.json: $($_.Exception.Message)"
   }
 
-  $optionalFiles += "mvp.defaults.json"
+  $optionalFiles += $defaultsSource
 }
 
 $missing = $files | Where-Object { !(Test-Path $_) }
@@ -61,7 +66,8 @@ foreach ($f in $files) {
 
 foreach ($f in $optionalFiles) {
   if (Test-Path $f) {
-    Copy-Item -Force $f (Join-Path $stage $f)
+    $destName = if ($f -eq "mvp.defaults.public.json") { "mvp.defaults.json" } else { $f }
+    Copy-Item -Force $f (Join-Path $stage $destName)
   }
 }
 

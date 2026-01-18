@@ -1,0 +1,6 @@
+{
+  "providerId": "aiwriter",
+  "apiBase": "https://your-gateway.example/v1",
+  "apiKey": "",
+  "model": "your-default-model"
+}
