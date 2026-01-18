@@ -4,6 +4,22 @@
 
 > 目的：记录当前工作进度、已完成事项、待办与风险点，方便你本地检查后再决定是否上传。
 
+## 2026-01-19（GitHub 上传与发版）
+
+- 仓库已推送到 GitHub：`https://github.com/axiaoge2/obsidian-ai-writer`
+- 默认分支：`main`
+- 已打 tag 并推送：`v0.1.0`（会触发 GitHub Actions 自动发布 Release）
+- 插件关键信息：
+  - `manifest.json#id`：`ai-writer-kit`
+  - `manifest.json#author`：`AxiaoGe2`
+- 文档已精简为技术向：`docs/` 仅保留开发/发版/贡献/更新/工作日志；已移除营销/规划类文档
+- 打包脚本强化：`scripts/package.ps1` 默认不包含 `mvp.defaults.json`；如 `-IncludeMvpDefaults` 且检测到非空 `apiKey` 会拒绝打包
+
+### 下一步（你确认即可）
+
+- 去 GitHub → Actions 确认 `Release (Obsidian Plugin)` 工作流跑完
+- 去 GitHub → Releases 检查是否生成 `ai-writer-kit.zip` 与 release 资产（`manifest.json/main.js/styles.css/versions.json`）
+
 ## 2026-01-18（当前进度快照）
 
 ### 已完成（MVP 可用）
@@ -36,7 +52,7 @@
 - License：MIT（`LICENSE`）
 - 新增：`CHANGELOG.md`、`CONTRIBUTING.md`
 - 新增：GitHub Actions Release 工作流（打 tag 自动构建并发布 release 资源）
-- 已在本地初始化 git 仓库（`git init`），未提交 commit（便于你检查后再决定下一步）
+- 已在本地初始化 git 仓库（`git init`）（后续已提交并推送，见 2026-01-19）
 - `.gitignore` 已忽略构建产物与本地配置：`dist/`、`release/`、`data.json`、`mvp.defaults.json` 等
 
 ### 当前待办（你确认后再做）
